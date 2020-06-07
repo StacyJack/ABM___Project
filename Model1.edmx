@@ -1,0 +1,500 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище SBM_ProjectModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Baguette_Products">
+          <Key>
+            <PropertyRef Name="Id_Baguette_Products" />
+          </Key>
+          <Property Name="Id_Baguette_Products" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Profit" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id_Customer" />
+          </Key>
+          <Property Name="Id_Customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Store_Address" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Delivery">
+          <Key>
+            <PropertyRef Name="Id_Delivery" />
+          </Key>
+          <Property Name="Id_Driver" Type="int" Nullable="false" />
+          <Property Name="Id_Customer" Type="int" Nullable="false" />
+          <Property Name="Date_of_export" Type="datetime" />
+          <Property Name="Delivery_date" Type="datetime" />
+          <Property Name="Cost" Type="int" Nullable="false" />
+          <Property Name="Id_Ordes" Type="int" Nullable="false" />
+          <Property Name="Id_Delivery" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="Id_Driver" />
+          </Key>
+          <Property Name="Id_Driver" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Factory">
+          <Key>
+            <PropertyRef Name="Id_Factory" />
+          </Key>
+          <Property Name="Id_Factory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id_Orders" />
+          </Key>
+          <Property Name="Id_Orders" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Delivery" Type="int" />
+          <Property Name="Id_item" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Id_Store" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Store1">
+          <Key>
+            <PropertyRef Name="Id_Store" />
+          </Key>
+          <Property Name="Id_Store" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Factory" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Delivery_Drivers">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id_Driver" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="Id_Driver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Delivery_Orders">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id_Customer" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="Id_Customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Delivery_Orders1">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id_Orders" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="Id_Ordes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Baguette_Products">
+          <End Role="Baguette_Products" Type="Self.Baguette_Products" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Baguette_Products">
+              <PropertyRef Name="Id_Baguette_Products" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Delivery">
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delivery">
+              <PropertyRef Name="Id_Delivery" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Id_Delivery" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Store1">
+          <End Role="Store1" Type="Self.Store1" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store1">
+              <PropertyRef Name="Id_Store" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Id_Store" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Store1_Factory">
+          <End Role="Factory" Type="Self.Factory" Multiplicity="1" />
+          <End Role="Store1" Type="Self.Store1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factory">
+              <PropertyRef Name="Id_Factory" />
+            </Principal>
+            <Dependent Role="Store1">
+              <PropertyRef Name="Id_Factory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище SBM_ProjectModelContainer">
+          <EntitySet Name="Baguette_Products" EntityType="Self.Baguette_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drivers" EntityType="Self.Drivers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Factory" EntityType="Self.Factory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store1" EntityType="Self.Store1" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Delivery_Drivers" Association="Self.FK_Delivery_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_Orders" Association="Self.FK_Delivery_Orders">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_Orders1" Association="Self.FK_Delivery_Orders1">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Baguette_Products" Association="Self.FK_Orders_Baguette_Products">
+            <End Role="Baguette_Products" EntitySet="Baguette_Products" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Delivery" Association="Self.FK_Orders_Delivery">
+            <End Role="Delivery" EntitySet="Delivery" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Store1" Association="Self.FK_Orders_Store1">
+            <End Role="Store1" EntitySet="Store1" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Store1_Factory" Association="Self.FK_Store1_Factory">
+            <End Role="Factory" EntitySet="Factory" />
+            <End Role="Store1" EntitySet="Store1" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SBM_ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Baguette_Products">
+          <Key>
+            <PropertyRef Name="Id_Baguette_Products" />
+          </Key>
+          <Property Name="Id_Baguette_Products" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Profit" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Baguette_Products" FromRole="Baguette_Products" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id_Customer" />
+          </Key>
+          <Property Name="Id_Customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Store_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Delivery" Relationship="Self.FK_Delivery_Orders" FromRole="Customers" ToRole="Delivery" />
+        </EntityType>
+        <EntityType Name="Delivery">
+          <Key>
+            <PropertyRef Name="Id_Delivery" />
+          </Key>
+          <Property Name="Id_Driver" Type="Int32" Nullable="false" />
+          <Property Name="Id_Customer" Type="Int32" Nullable="false" />
+          <Property Name="Date_of_export" Type="DateTime" Precision="3" />
+          <Property Name="Delivery_date" Type="DateTime" Precision="3" />
+          <Property Name="Cost" Type="Int32" Nullable="false" />
+          <Property Name="Id_Ordes" Type="Int32" Nullable="false" />
+          <Property Name="Id_Delivery" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Delivery_Orders" FromRole="Delivery" ToRole="Customers" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_Delivery_Drivers" FromRole="Delivery" ToRole="Drivers" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Delivery_Orders1" FromRole="Delivery" ToRole="Orders" />
+          <NavigationProperty Name="Orders1" Relationship="Self.FK_Orders_Delivery" FromRole="Delivery" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="Id_Driver" />
+          </Key>
+          <Property Name="Id_Driver" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Delivery" Relationship="Self.FK_Delivery_Drivers" FromRole="Drivers" ToRole="Delivery" />
+        </EntityType>
+        <EntityType Name="Factory">
+          <Key>
+            <PropertyRef Name="Id_Factory" />
+          </Key>
+          <Property Name="Id_Factory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Store1" Relationship="Self.FK_Store1_Factory" FromRole="Factory" ToRole="Store1" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id_Orders" />
+          </Key>
+          <Property Name="Id_Orders" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Delivery" Type="Int32" />
+          <Property Name="Id_item" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Id_Store" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Baguette_Products" Relationship="Self.FK_Orders_Baguette_Products" FromRole="Orders" ToRole="Baguette_Products" />
+          <NavigationProperty Name="Delivery" Relationship="Self.FK_Delivery_Orders1" FromRole="Orders" ToRole="Delivery" />
+          <NavigationProperty Name="Delivery1" Relationship="Self.FK_Orders_Delivery" FromRole="Orders" ToRole="Delivery" />
+          <NavigationProperty Name="Store1" Relationship="Self.FK_Orders_Store1" FromRole="Orders" ToRole="Store1" />
+        </EntityType>
+        <EntityType Name="Store1">
+          <Key>
+            <PropertyRef Name="Id_Store" />
+          </Key>
+          <Property Name="Id_Store" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Factory" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Factory" Relationship="Self.FK_Store1_Factory" FromRole="Store1" ToRole="Factory" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Store1" FromRole="Store1" ToRole="Orders" />
+        </EntityType>
+        <Association Name="FK_Orders_Baguette_Products">
+          <End Role="Baguette_Products" Type="Self.Baguette_Products" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Baguette_Products">
+              <PropertyRef Name="Id_Baguette_Products" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Delivery_Orders">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id_Customer" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="Id_Customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Delivery_Drivers">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="Id_Driver" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="Id_Driver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Delivery_Orders1">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id_Orders" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="Id_Ordes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Delivery">
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delivery">
+              <PropertyRef Name="Id_Delivery" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Id_Delivery" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Store1_Factory">
+          <End Role="Factory" Type="Self.Factory" Multiplicity="1" />
+          <End Role="Store1" Type="Self.Store1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factory">
+              <PropertyRef Name="Id_Factory" />
+            </Principal>
+            <Dependent Role="Store1">
+              <PropertyRef Name="Id_Factory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Store1">
+          <End Role="Store1" Type="Self.Store1" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store1">
+              <PropertyRef Name="Id_Store" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Id_Store" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SBM_ProjectEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Baguette_Products" EntityType="Self.Baguette_Products" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="Delivery" EntityType="Self.Delivery" />
+          <EntitySet Name="Drivers" EntityType="Self.Drivers" />
+          <EntitySet Name="Factory" EntityType="Self.Factory" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Store1" EntityType="Self.Store1" />
+          <AssociationSet Name="FK_Orders_Baguette_Products" Association="Self.FK_Orders_Baguette_Products">
+            <End Role="Baguette_Products" EntitySet="Baguette_Products" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_Orders" Association="Self.FK_Delivery_Orders">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_Drivers" Association="Self.FK_Delivery_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_Orders1" Association="Self.FK_Delivery_Orders1">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Delivery" Association="Self.FK_Orders_Delivery">
+            <End Role="Delivery" EntitySet="Delivery" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Store1_Factory" Association="Self.FK_Store1_Factory">
+            <End Role="Factory" EntitySet="Factory" />
+            <End Role="Store1" EntitySet="Store1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Store1" Association="Self.FK_Orders_Store1">
+            <End Role="Store1" EntitySet="Store1" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SBM_ProjectModelContainer" CdmEntityContainer="SBM_ProjectEntities3">
+          <EntitySetMapping Name="Baguette_Products">
+            <EntityTypeMapping TypeName="SBM_ProjectModel.Baguette_Products">
+              <MappingFragment StoreEntitySet="Baguette_Products">
+                <ScalarProperty Name="Id_Baguette_Products" ColumnName="Id_Baguette_Products" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Profit" ColumnName="Profit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="SBM_ProjectModel.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Store_Address" ColumnName="Store_Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Delivery">
+            <EntityTypeMapping TypeName="SBM_ProjectModel.Delivery">
+              <MappingFragment StoreEntitySet="Delivery">
+                <ScalarProperty Name="Id_Driver" ColumnName="Id_Driver" />
+                <ScalarProperty Name="Id_Customer" ColumnName="Id_Customer" />
+                <ScalarProperty Name="Date_of_export" ColumnName="Date_of_export" />
+                <ScalarProperty Name="Delivery_date" ColumnName="Delivery_date" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Id_Ordes" ColumnName="Id_Ordes" />
+                <ScalarProperty Name="Id_Delivery" ColumnName="Id_Delivery" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="SBM_ProjectModel.Drivers">
+              <MappingFragment StoreEntitySet="Drivers">
+                <ScalarProperty Name="Id_Driver" ColumnName="Id_Driver" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Factory">
+            <EntityTypeMapping TypeName="SBM_ProjectModel.Factory">
+              <MappingFragment StoreEntitySet="Factory">
+                <ScalarProperty Name="Id_Factory" ColumnName="Id_Factory" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="City" ColumnName="City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="SBM_ProjectModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Id_Orders" ColumnName="Id_Orders" />
+                <ScalarProperty Name="Id_Delivery" ColumnName="Id_Delivery" />
+                <ScalarProperty Name="Id_item" ColumnName="Id_item" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Id_Store" ColumnName="Id_Store" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store1">
+            <EntityTypeMapping TypeName="SBM_ProjectModel.Store1">
+              <MappingFragment StoreEntitySet="Store1">
+                <ScalarProperty Name="Id_Store" ColumnName="Id_Store" />
+                <ScalarProperty Name="Id_Factory" ColumnName="Id_Factory" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
