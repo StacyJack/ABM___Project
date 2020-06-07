@@ -8,7 +8,7 @@ namespace ABM___Project
 {
     static class Program
     {
-        public static SBM_ProjectEntities3 wftDb = new SBM_ProjectEntities3();
+        public static SBM_ProjectEntities5 wftDb = new SBM_ProjectEntities5();
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -17,7 +17,7 @@ namespace ABM___Project
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FormAuthorization());
         }
     }
 }

@@ -70,6 +70,15 @@
           <Property Name="Id_Factory" Type="int" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Delivery_Drivers">
           <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
           <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
@@ -162,6 +171,7 @@
           <EntitySet Name="Factory" EntityType="Self.Factory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Store1" EntityType="Self.Store1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Delivery_Drivers" Association="Self.FK_Delivery_Drivers">
             <End Role="Drivers" EntitySet="Drivers" />
             <End Role="Delivery" EntitySet="Delivery" />
@@ -275,6 +285,15 @@
           <NavigationProperty Name="Factory" Relationship="Self.FK_Store1_Factory" FromRole="Store1" ToRole="Factory" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Store1" FromRole="Store1" ToRole="Orders" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Orders_Baguette_Products">
           <End Role="Baguette_Products" Type="Self.Baguette_Products" Multiplicity="1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
@@ -359,7 +378,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SBM_ProjectEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SBM_ProjectEntities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Baguette_Products" EntityType="Self.Baguette_Products" />
           <EntitySet Name="Customers" EntityType="Self.Customers" />
           <EntitySet Name="Delivery" EntityType="Self.Delivery" />
@@ -367,6 +386,7 @@
           <EntitySet Name="Factory" EntityType="Self.Factory" />
           <EntitySet Name="Orders" EntityType="Self.Orders" />
           <EntitySet Name="Store1" EntityType="Self.Store1" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK_Orders_Baguette_Products" Association="Self.FK_Orders_Baguette_Products">
             <End Role="Baguette_Products" EntitySet="Baguette_Products" />
             <End Role="Orders" EntitySet="Orders" />
@@ -401,7 +421,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище SBM_ProjectModelContainer" CdmEntityContainer="SBM_ProjectEntities3">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SBM_ProjectModelContainer" CdmEntityContainer="SBM_ProjectEntities5">
           <EntitySetMapping Name="Baguette_Products">
             <EntityTypeMapping TypeName="SBM_ProjectModel.Baguette_Products">
               <MappingFragment StoreEntitySet="Baguette_Products">
@@ -471,6 +491,16 @@
                 <ScalarProperty Name="Id_Store" ColumnName="Id_Store" />
                 <ScalarProperty Name="Id_Factory" ColumnName="Id_Factory" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SBM_ProjectModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

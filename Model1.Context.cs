@@ -13,10 +13,10 @@ namespace ABM___Project
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SBM_ProjectEntities3 : DbContext
+    public partial class SBM_ProjectEntities5 : DbContext
     {
-        public SBM_ProjectEntities3()
-            : base("name=SBM_ProjectEntities3")
+        public SBM_ProjectEntities5()
+            : base("name=SBM_ProjectEntities5")
         {
         }
     
@@ -32,5 +32,6 @@ namespace ABM___Project
         public virtual DbSet<Factory> Factory { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Store1> Store1 { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

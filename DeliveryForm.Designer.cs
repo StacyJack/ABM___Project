@@ -274,7 +274,7 @@
             this.Controls.Add(this.textBoxDate_of_export);
             this.Controls.Add(this.comboBoxCustomer);
             this.Name = "DeliveryForm";
-            this.Text = "DeliveryForm";
+            this.Text = "Доставка";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

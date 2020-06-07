@@ -164,7 +164,7 @@
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonAdd);
             this.Name = "Store1Form";
-            this.Text = "Store1Form";
+            this.Text = "Маназины";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

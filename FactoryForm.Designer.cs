@@ -163,7 +163,7 @@
             this.Controls.Add(this.textBoxname);
             this.Controls.Add(this.buttonAdd);
             this.Name = "FactoryForm";
-            this.Text = "FactoryForm";
+            this.Text = "Фабрики";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

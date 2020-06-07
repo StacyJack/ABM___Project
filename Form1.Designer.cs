@@ -1,6 +1,6 @@
 ﻿namespace ABM___Project
 {
-    partial class Form1
+    partial class Menu
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -119,7 +119,7 @@
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
-            // Form1
+            // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -132,8 +132,8 @@
             this.Controls.Add(this.buttonOrders);
             this.Controls.Add(this.buttonStore1);
             this.Controls.Add(this.buttonFactory);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Menu";
+            this.Text = "Меню";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

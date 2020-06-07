@@ -38,12 +38,12 @@
             this.labelName = new System.Windows.Forms.Label();
             this.labelPatronymic = new System.Windows.Forms.Label();
             this.listViewCustomers = new System.Windows.Forms.ListView();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBoxAddress = new System.Windows.Forms.TextBox();
             this.labelAddress = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -147,16 +147,6 @@
             this.listViewCustomers.View = System.Windows.Forms.View.Details;
             this.listViewCustomers.SelectedIndexChanged += new System.EventHandler(this.listViewCustomers_SelectedIndexChanged);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::ABM___Project.Properties.Resources.Vramky_Logo_200;
-            this.pictureBox1.Location = new System.Drawing.Point(-3, 305);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(275, 151);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 18;
-            this.pictureBox1.TabStop = false;
-            // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Id Заказчика";
@@ -181,6 +171,16 @@
             // 
             this.columnHeader5.Text = "Адрес заказчика";
             this.columnHeader5.Width = 117;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ABM___Project.Properties.Resources.Vramky_Logo_200;
+            this.pictureBox1.Location = new System.Drawing.Point(-3, 305);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(275, 151);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 18;
+            this.pictureBox1.TabStop = false;
             // 
             // textBoxAddress
             // 
@@ -217,7 +217,7 @@
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonAdd);
             this.Name = "CustomersForm";
-            this.Text = "CustomersForm";
+            this.Text = "Заказчики";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

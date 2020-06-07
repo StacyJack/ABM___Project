@@ -223,7 +223,7 @@
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.buttonEdit);
             this.Name = "DriversForm";
-            this.Text = "DriversForm";
+            this.Text = "Водители";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -10,11 +10,12 @@ using System.Windows.Forms;
 
 namespace ABM___Project
 {
-    public partial class Form1 : Form
+    public partial class Menu : Form
     {
-        public Form1()
+        public Menu()
         {
             InitializeComponent();
+            
         }
 
         private void buttonFactory_Click(object sender, EventArgs e)

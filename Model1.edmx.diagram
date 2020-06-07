@@ -4,14 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="954b257e30014e85a0a883b63ecd77c4" Name="Diagram1" ZoomLevel="82">
-        <EntityTypeShape EntityType="SBM_ProjectModel.Baguette_Products" Width="1.5" PointX="2.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SBM_ProjectModel.Customers" Width="1.5" PointX="9.875" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SBM_ProjectModel.Delivery" Width="1.5" PointX="6.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SBM_ProjectModel.Drivers" Width="1.5" PointX="10.125" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SBM_ProjectModel.Factory" Width="1.5" PointX="0.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SBM_ProjectModel.Orders" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SBM_ProjectModel.Store1" Width="1.5" PointX="0.5" PointY="4.25" IsExpanded="true" />
+      <Diagram DiagramId="291fa2e312db4e77a3f287c7d93e6c19" Name="Diagram1">
+        <EntityTypeShape EntityType="SBM_ProjectModel.Baguette_Products" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBM_ProjectModel.Customers" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBM_ProjectModel.Delivery" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBM_ProjectModel.Drivers" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBM_ProjectModel.Factory" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBM_ProjectModel.Orders" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBM_ProjectModel.Store1" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SBM_ProjectModel.Users" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="SBM_ProjectModel.FK_Orders_Baguette_Products" ManuallyRouted="false" />
         <AssociationConnector Association="SBM_ProjectModel.FK_Delivery_Orders" ManuallyRouted="false" />
         <AssociationConnector Association="SBM_ProjectModel.FK_Delivery_Drivers" ManuallyRouted="false" />
